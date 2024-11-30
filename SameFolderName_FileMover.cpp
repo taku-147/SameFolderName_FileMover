@@ -60,6 +60,7 @@ int main(int argc, char* argv[]) {
                         //ファイルを移動する
                         path newFilePath = folderPath / filePath.filename();
                         rename(tmpMovingPath / filePath.filename(), newFilePath);
+                        cout << "Moved: " << filePath << " -> " << newFilePath << endl;
 
 
                         bool onlyZoneIdentifier = true;
@@ -75,6 +76,10 @@ int main(int argc, char* argv[]) {
                         if (onlyZoneIdentifier) {
                             remove_all(tmpMovingPath);
                         }
+                        //移動先に同じファイルがあったときに上書き確認処理入れようか考えたけど、
+                        //よく考えたら「Windowsの仕様でフォルダと同名のファイルがある場合、エラー出ちゃう」仕様だから
+                        //いらないよね？ってことで入れてない
+
                         found = true;
                     }
                 }
