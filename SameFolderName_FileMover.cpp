@@ -6,11 +6,10 @@ using namespace std;
 using namespace std::filesystem;
 
 int main(int argc, char* argv[]) {
-    string version = "0.1.2";
+    string version = "1.0.0";
     string e_output = "Unknown Error";
     cout << "SameFolderName_FileMover " << "v" << version << endl;
     cout << "------------------------------" << endl;
-
     //引数指定されてなかったとき
     if (argc < 2) {
         cout << "SameFolderName_FileMover.exe [arg]" << endl;
@@ -29,6 +28,14 @@ int main(int argc, char* argv[]) {
             return 1;
         } else {
             bool found = false;
+            char ask;
+
+            //聞いてみる
+            cout << folderPath << endl << "Move files in subdirectories with the same name as the subdirectory to the parent directory? [y/n]: ";
+            cin >> ask;
+            if(ask != 'y') {
+                return 0;
+            }
             for (const auto& entry : directory_iterator(folderPath)) {
                 if (is_directory(entry)) {
                     path subDir = entry.path();
